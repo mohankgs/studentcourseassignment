@@ -19,6 +19,106 @@ To run your application:
 
 == Help
 
+=== DB Design
 
+CREATE TABLE "Course" (
+	"Id"	INTEGER,
+	"Name"	TEXT NOT NULL UNIQUE,
+	"startDate"	TEXT NOT NULL,
+	"endDate"	TEXT NOT NULL,
+	"startTime"	TEXT NOT NULL,
+	"endTime"	TEXT NOT NULL,
+	"credit"	INTEGER,
+	"capacity"	INTEGER,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+)
 
+CREATE TABLE "Student" (
+	"Id"	INTEGER NOT NULL,
+	"Name"	TEXT NOT NULL,
+	"credit"	INTEGER,
+	PRIMARY KEY("Id")
+)
 
+CREATE TABLE "StudentCourse" (
+	"studentId"	INTEGER NOT NULL,
+	"courseId"	INTEGER NOT NULL,
+	"grade"	TEXT,
+	PRIMARY KEY("studentId","courseId"),
+	FOREIGN KEY("studentId") REFERENCES "Student"("Id"),
+	FOREIGN KEY("courseId") REFERENCES "Course"("Id")
+)
+
+=== REST API
+
+* Create Course
+
+POST http://localhost:8080/course
+Request Body:
+{
+    "name":"Data Structure and Algorithms",
+    "startDate": "9/5/2022",
+    "endDate" : "12/6/2022",
+    "startTime" : "6:00 PM",
+    "endTime" : "9:00 PM",
+    "credit" : 3,
+    "capacity" : 20
+}
+
+* Create Student
+
+POST http://localhost:8080/student
+Request Body:
+{
+    "name":"Mohan",
+    "credit":"3"
+}
+
+* Register Student in a Course
+
+POST http://localhost:8080/student/register
+Request Body:
+{
+    "id":1,
+    "course": "Data Structure and Algorithms"
+}
+
+* Set Grade for a Student
+
+POST http://localhost:8080/student/course/grade
+Request Body:
+{
+    "id":1,
+    "course": "Data Structure and Algorithms",
+    "grade": "A"
+}
+
+* Get Grade for a Student using Id
+
+GET http://localhost:8080/student/1/course
+
+Response:
+[
+    {
+        'course':'Data Structure and Algorithms'
+        'grade':'A'
+    }
+]
+
+* Get Grade Point Average for a Student using Id
+
+GET http://localhost:8080/student/1/gradepoint
+
+Response:
+{
+	'gradePointAverage': 5.0
+}
+
+* Get Grade Point Average for a Course using Id
+
+GET http://localhost:8080/course/1/gradepoint
+
+Response:
+{
+	'gradePointAverage': 5.0
+}
