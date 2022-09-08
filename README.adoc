@@ -20,7 +20,7 @@ To run your application:
 == Help
 
 === DB Design
-
+```
 CREATE TABLE "Course" (
 	"Id"	INTEGER,
 	"Name"	TEXT NOT NULL UNIQUE,
@@ -32,6 +32,7 @@ CREATE TABLE "Course" (
 	"capacity"	INTEGER,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 )
+```
 
 CREATE TABLE "Student" (
 	"Id"	INTEGER NOT NULL,
