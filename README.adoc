@@ -58,8 +58,9 @@ CREATE TABLE "StudentCourse" (
 * Create Course
 
 POST http://localhost:8080/course
-Request Body:
+
 ```
+Request Body:
 {
     "name":"Data Structure and Algorithms",
     "startDate": "9/5/2022",
@@ -74,8 +75,9 @@ Request Body:
 * Create Student
 
 POST http://localhost:8080/student
-Request Body:
+
 ```
+Request Body:
 {
     "name":"Mohan",
     "credit":"3"
@@ -85,26 +87,31 @@ Request Body:
 * Register Student in a Course
 
 POST http://localhost:8080/student/register
+```
 Request Body:
 {
     "id":1,
     "course": "Data Structure and Algorithms"
 }
+```
 
 * Set Grade for a Student
 
 POST http://localhost:8080/student/course/grade
+```
 Request Body:
 {
     "id":1,
     "course": "Data Structure and Algorithms",
     "grade": "A"
 }
+```
 
 * Get Grade for a Student using Id
 
 GET http://localhost:8080/student/1/course
 
+```
 Response:
 [
     {
@@ -112,21 +119,25 @@ Response:
         'grade':'A'
     }
 ]
+```
 
 * Get Grade Point Average for a Student using Id
 
 GET http://localhost:8080/student/1/gradepoint
 
+```
 Response:
 {
 	'gradePointAverage': 5.0
 }
+```
 
 * Get Grade Point Average for a Course using Id
 
 GET http://localhost:8080/course/1/gradepoint
-
+```
 Response:
 {
 	'gradePointAverage': 5.0
 }
+```
